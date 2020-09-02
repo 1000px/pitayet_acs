@@ -9,18 +9,19 @@ from serv.api.auth import auth
 @auth.login_required
 def get_users():
     page = request.args.get('page', 1, type=int)
+    per_page = request.args.get('per_page', 10, type=int)
     pagination = User.query.paginate(
         page,
-        per_page=20,
+        per_page=per_page,
         error_out=False
     )
     users = pagination.items
     prev = None
     if pagination.has_prev:
-        prev = url_for('api.get_users', page=page-1)
+        prev = url_for('api.get_users', page=page-1, per_page=per_page)
     next = None
     if pagination.has_next:
-        next = url_for('api.get_users', page=page+1)
+        next = url_for('api.get_users', page=page+1, per_page=per_page)
 
     return jsonify({
         'users': [user.to_json() for user in users],
@@ -33,7 +34,6 @@ def get_users():
 @api.route('/users/<int:id>')
 @auth.login_required
 def get_user(id):
-    print('get user route .........')
     user = User.query.filter_by(id=id).first()
     result = {}
     if user is None:

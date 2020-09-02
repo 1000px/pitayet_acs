@@ -1,6 +1,6 @@
 import os
 from serv import create_app, db
-from serv.models import User
+from serv.models import User, Section, Site
 from flask_migrate import Migrate
 
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
@@ -10,7 +10,9 @@ migrate = Migrate(app, db)
 def make_shell_context():
     return dict(
         db          = db,
-        User        = User
+        User        = User,
+        Site        = Site,
+        Section     = Section
     )
 
 @app.cli.command()
