@@ -14,6 +14,7 @@ mysqlclient = "*"
 faker = "*"
 flask-httpauth = "*"
 flask-cors = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.8"

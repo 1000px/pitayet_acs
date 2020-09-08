@@ -18,7 +18,7 @@ class User(db.Model):
     password_hash = db.Column(db.String(128))
 
     sites = db.relationship('Site', backref='user')
-
+    
     @property
     def password(self):
         raise AttributeError('password是非可读属性')

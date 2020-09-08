@@ -18,5 +18,9 @@ def create_app(config_name):
     from serv.page import page as page_blueprint
     app.register_blueprint(page_blueprint, url_prefix="/page")
 
+    from serv.file_http import file_api as file_blueprint
+    CORS(file_blueprint)
+    app.register_blueprint(file_blueprint, url_prefix="/file/v1")
+
     return app
   
