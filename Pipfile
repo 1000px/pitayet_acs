@@ -15,6 +15,7 @@ faker = "*"
 flask-httpauth = "*"
 flask-cors = "*"
 pillow = "*"
+alipay-sdk-python = "*"
 
 [requires]
 python_version = "3.8"
