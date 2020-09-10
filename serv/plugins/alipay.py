@@ -1,4 +1,4 @@
-from datatime import datetime
+from datetime import datetime
 from Crypto.PublicKey import RSA
 from Crypto.Signature import PKCS1_v1_5
 from Crypto.Hash import SHA256
@@ -25,7 +25,7 @@ class AliPlay(object):
         with open(self.alipay_public_key_path) as fp:
             self.alipay_public_key = RSA.importKey(fp.read())
 
-        if debug is True
+        if debug is True:
             self.__gateway = 'https://openapi.alipaydev.com/gateway.do'
         else:
             self.__gateway = 'https://openapi.alipay.com/gateway.do'
@@ -39,7 +39,8 @@ class AliPlay(object):
         }
 
         biz_content.update(kwargs)
-        data = self.build_body('aplipay.trade.page.pay', biz_content, self.return_url)
+        # 
+        data = self.build_body('alipay.trade.page.pay', biz_content, self.return_url)
         return self.sign_data(data)
     
     def build_body(self, method, biz_content, return_url=None):
