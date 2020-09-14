@@ -1,8 +1,9 @@
 from serv.api import api
-from flask import jsonify, request, url_for, abort
+from flask import jsonify, request, url_for, abort, g
 from serv.models import User
 from serv import db
 from serv.api.auth import auth
+import re
 
 # 根据分页信息获取相应users列表
 @api.route('/users/')
@@ -70,3 +71,24 @@ def disabled_user(id):
             'user': user.to_json()
         }
     return jsonify(result)
+
+@api.route('/user', methods=['PUT'])
+@auth.login_required
+def update_user():
+    # 目前允许更新的，只有用户名！
+    username = request.json.get('username')
+    # 用户名格式验证
+    pat_username = r'^[0-9a-zA-Z_]{5,18}$'
+    if re.match(pat_username, username) is None:
+        return jsonify({
+            'res': 'failed',
+            'failed_infor': '用户名格式错误'
+        })
+    user = g.current_user
+    user.username = username
+    db.session.add(user)
+    db.session.commit()
+    return jsonify({
+        'res': 'success',
+        'user': user.to_json()
+    })

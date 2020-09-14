@@ -17,10 +17,10 @@ def users(count=100):
         )
         db.session.add(u)
         i += 1
-    try:
-        db.session.commit()
-    except IntegrityError:
-        db.session.rollback()
+        try:
+            db.session.commit()
+        except IntegrityError:
+            db.session.rollback()
 
 # 网站
 def sites(count=100):

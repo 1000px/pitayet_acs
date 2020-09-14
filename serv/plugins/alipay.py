@@ -44,6 +44,8 @@ class AliPlay(object):
         return self.sign_data(data)
     
     def build_body(self, method, biz_content, return_url=None):
+        print('biz_content:')
+        print(biz_content)
         data = {
             'app_id': self.appid,
             'method': method,

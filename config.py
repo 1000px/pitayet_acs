@@ -9,6 +9,7 @@ class Config:
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     FLASK_ADMIN = os.environ.get('FLASK_ADMIN')
+    RESOURCE_IMG = os.environ.get('RESOURCE_IMG')
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
@@ -20,6 +21,7 @@ class DevelopmentConfig(Config):
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
         'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite')
+    
 
 class TestingConfig(Config):
     TESTING = True

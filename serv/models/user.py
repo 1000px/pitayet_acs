@@ -14,8 +14,9 @@ class User(db.Model):
     disabled = db.Column(db.Boolean, default=False)
     create_time = db.Column(db.DateTime(), default=datetime.utcnow)
     last_login = db.Column(db.DateTime(), default=datetime.utcnow)
-
+    confirmed = db.Column(db.Boolean, default=False)
     password_hash = db.Column(db.String(128))
+    avatar_name = db.Column(db.String(512))
 
     sites = db.relationship('Site', backref='user')
     
@@ -41,7 +42,9 @@ class User(db.Model):
             'email': self.email,
             'disabled': self.disabled,
             'create_time': self.create_time,
-            'last_login': self.last_login
+            'last_login': self.last_login,
+            'confirmed': self.confirmed,
+            'avatar_name': self.avatar_name
         }
 
     @staticmethod
